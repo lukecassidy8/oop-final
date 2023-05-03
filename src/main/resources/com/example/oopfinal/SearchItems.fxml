@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopfinal.SearchDatabaseController">
+   <children>
+      <TableView fx:id="tableItems" layoutX="477.0" layoutY="208.0" prefHeight="480.0" prefWidth="880.0">
+        <columns>
+          <TableColumn fx:id="columnID" prefWidth="35.0" text="ID" />
+          <TableColumn fx:id="columnItemName" prefWidth="224.6666259765625" text="Item Name" />
+            <TableColumn fx:id="columnDesc" prefWidth="247.0" text="Description" />
+            <TableColumn fx:id="columnLoanDate" prefWidth="121.333251953125" text="Loan Date" />
+            <TableColumn fx:id="columnReturnDate" prefWidth="130.666748046875" text="Return Date" />
+            <TableColumn fx:id="columnLoanedOut" prefWidth="120.6666259765625" text="Loaned Out?" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnSearch" layoutX="200.0" layoutY="534.0" mnemonicParsing="false" onAction="#searchItems" text="Search All Items" />
+      <ComboBox fx:id="comboBoxItems" layoutX="194.0" layoutY="266.0" prefWidth="150.0" />
+      <Button fx:id="getComboBoxItems" layoutX="232.0" layoutY="313.0" mnemonicParsing="false" onAction="#getItemFromComboBox" text="Select Item" />
+      <ComboBox fx:id="comboBoxSelectID" layoutX="194.0" layoutY="420.0" prefWidth="150.0" />
+      <Button fx:id="btnConfirmLoanOut" layoutX="243.0" layoutY="473.0" mnemonicParsing="false" onAction="#confirmLoanOut" text="Loan Out" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1feaff" height="900.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+      <ImageView fx:id="imageViewQuit" fitHeight="50.0" fitWidth="50.0" layoutX="23.0" layoutY="781.0" onMouseClicked="#quit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../logout.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageViewHome" fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../home.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageViewFaults" fitHeight="50.0" fitWidth="50.0" layoutX="29.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../faults.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageViewLogo" fitHeight="175.0" fitWidth="175.0" layoutX="123.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../library%20system%20logo%20new.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="311.0" layoutY="-2.0" prefHeight="209.0" prefWidth="215.0" text="Loan Items" textFill="WHITE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="128.0" layoutY="212.0" prefHeight="17.0" prefWidth="309.0" text="What item do you want to loan out? " textFill="WHITE" />
+      <Label alignment="CENTER" layoutX="124.0" layoutY="374.0" prefHeight="17.0" prefWidth="313.0" text="Select the ID of the item" textFill="WHITE" />
+      <ImageView fx:id="imageViewReturn" fitHeight="50.0" fitWidth="50.0" layoutX="29.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../return.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="763.0" layoutY="748.0" mnemonicParsing="false" onAction="#printToFile" prefHeight="73.0" prefWidth="195.0" text="Print DB Contents to File" />
+   </children>
+</AnchorPane>

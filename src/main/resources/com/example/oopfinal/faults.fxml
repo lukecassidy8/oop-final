@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopfinal.FaultsController">
+   <children>
+      <TableView fx:id="tableFaults" layoutX="475.0" layoutY="112.0" prefHeight="549.0" prefWidth="963.0">
+        <columns>
+          <TableColumn fx:id="columnFaultID" prefWidth="75.0" text="Fault ID" />
+          <TableColumn fx:id="columnItemID" prefWidth="97.6666259765625" text="Item ID" />
+            <TableColumn fx:id="columnItemName" prefWidth="177.33331298828125" text="Item Name" />
+            <TableColumn fx:id="columnFaultDescription" prefWidth="341.66668701171875" text="Fault Description" />
+            <TableColumn fx:id="columnSeverity" prefWidth="128.66668701171875" text="Severity" />
+            <TableColumn fx:id="columnCreatedAt" prefWidth="144.33331298828125" text="Created At" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="comboBoxItems" layoutX="194.0" layoutY="266.0" prefWidth="150.0" />
+      <Button fx:id="btnSearch" layoutX="232.0" layoutY="313.0" mnemonicParsing="false" onAction="#getItemsFromComboBox" text="Search" />
+      <ComboBox fx:id="comboBoxSelectID" layoutX="194.0" layoutY="420.0" prefWidth="150.0" />
+      <Button fx:id="btnSelectID" layoutX="243.0" layoutY="473.0" mnemonicParsing="false" onAction="#viewFaults" text="Select" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1feaff" height="900.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+      <ImageView fx:id="imageViewHome" fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../home.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageViewLoan" fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../loan.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageViewReturn" fitHeight="50.0" fitWidth="50.0" layoutX="29.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../return.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageViewQuit" fitHeight="50.0" fitWidth="50.0" layoutX="23.0" layoutY="781.0" onMouseClicked="#quit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../logout.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageViewLogo" fitHeight="175.0" fitWidth="175.0" layoutX="123.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../library%20system%20logo%20new.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="102.0" layoutY="217.0" prefHeight="17.0" prefWidth="373.0" text="Select the item you want to view the faults for" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelSelectID" alignment="CENTER" layoutX="101.0" layoutY="378.0" prefHeight="20.0" prefWidth="376.0" text="Select the ID of the item you want to view the faults for" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

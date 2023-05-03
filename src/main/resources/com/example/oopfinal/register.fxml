@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopfinal.RegisterController">
+   <children>
+      <Button fx:id="btnLoadLogin" layoutX="199.0" layoutY="334.0" mnemonicParsing="false" onAction="#loadLogin" text="Login" />
+      <Label layoutX="67.0" layoutY="109.0" text="Username" />
+      <TextField fx:id="usernameTextField" layoutX="170.0" layoutY="105.0" />
+      <Label layoutX="67.0" layoutY="177.0" text="Password" />
+      <PasswordField fx:id="passwordTextField" layoutX="170.0" layoutY="173.0" />
+      <Button fx:id="btnRegister" layoutX="192.0" layoutY="299.0" mnemonicParsing="false" onAction="#register" text="Register" />
+      <Label fx:id="registerMessageLabel" layoutX="231.0" layoutY="214.0" />
+      <TextField fx:id="emailTextField" layoutX="170.0" layoutY="231.0" />
+      <Label layoutX="67.0" layoutY="235.0" text="Email" />
+   </children>
+</AnchorPane>

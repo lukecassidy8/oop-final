@@ -1,0 +1,25 @@
+ID	Item Name	Description	Loan Date	Return Date	Loaned Out?	
+1	24 Inch Monitor	24 Inch Monitor for employees	2023-04-21	2024-01-01	1	
+2	27 Inch Monitor	27 Inch Monitor for employees	2023-04-25	2022-02-14	0	
+3	27 Inch Monitor	27 Inch Monitor for employees	2023-04-25	2022-02-14	1	
+4	24 Inch Monitor	24 Inch Monitor for employees	2023-05-02	null	1	
+5	Mouse	Wired mouse	null	null	0	
+6	Mouse	Wired mouse	null	null	0	
+7	Keyboard	Keyboard	null	null	0	
+8	Keyboard	Keyboard	null	null	0	
+9	Monitor Stand	Strong monitor stand for better eye level	2023-04-28	null	1	
+10	Monitor Stand	Strong monitor stand for better eye level	null	null	0	
+11	Headset	Wired headset for meetings	null	null	0	
+12	Headset	Wired headset for meetings	null	null	0	
+13	Laptop charger	130W laptop charger	null	null	0	
+14	Laptop charger	130W laptop charger	null	null	0	
+15	Ergonomic chair	Ergonomic chair for stabilised working environment	null	null	0	
+16	Ergonomic chair 	Ergonomic chair for stabilised working environment	null	null	0	
+17	Earphones	In-ear earphones	null	null	0	
+18	Earphones	In-ear earphones	null	null	0	
+19	HDMI cable	HDMI cable to connect laptop to external monitor	null	null	0	
+20	HDMI cable	HDMI cable to connect laptop to external monitor	null	null	0	
+21	Standard laptop	Standard laptop for everyday tasks and meetings	null	null	0	
+22	Standard laptop	Standard laptop for everyday tasks and meetings	null	null	0	
+23	Development laptop	Development laptop for coding and testing.	2023-04-28	null	1	
+24	Development laptop	Development laptop for coding and testing.	null	null	0	
