@@ -2,7 +2,6 @@ package com.example.oopfinal;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,11 +46,7 @@ public class ReturnItemController implements Initializable {
     @FXML
     private ComboBox<Integer> comboBoxSelectID;
     @FXML
-    private Button getComboBoxItems;
-    @FXML
     private Button btnConfirmReturn;
-    @FXML
-    private Button btnViewAllLoanedOutItems;
     private final ObservableList<Item> itemList = FXCollections.observableArrayList();
     @FXML
     private ImageView imageViewLogo;
@@ -67,7 +62,6 @@ public class ReturnItemController implements Initializable {
     private ImageView imageViewHome;
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
 
     @Override
@@ -78,15 +72,15 @@ public class ReturnItemController implements Initializable {
         comboBoxSelectID.setVisible(false);
         btnConfirmReturn.setVisible(false);
         labelSelectID.setVisible(false);
-        Image logoImage = new Image("file:/C:/Users/luke.cassidy/Desktop/library system logo new.png");
+        Image logoImage = new Image(getClass().getResourceAsStream("/images/sidebar/logo.png"));
         imageViewLogo.setImage(logoImage);
         imageViewLogo.setFitHeight(90);
         imageViewLogo.setFitWidth(90);
-        Image logoutImage = new Image("file:/C:/Users/luke.cassidy/Desktop/logout.png");
+        Image logoutImage = new Image(getClass().getResourceAsStream("/images/sidebar/logout.png"));
         imageViewQuit.setImage(logoutImage);
         imageViewQuit.setFitWidth(50);
         imageViewQuit.setFitHeight(50);
-        Image loadLoanPage = new Image("file:/C:/Users/luke.cassidy/Desktop/loan.png");
+        Image loadLoanPage = new Image(getClass().getResourceAsStream("/images/sidebar/loan.png"));
         imageViewLoan.setImage(loadLoanPage);
         imageViewLoan.setFitWidth(50);
         imageViewLoan.setFitHeight(50);
@@ -104,7 +98,7 @@ public class ReturnItemController implements Initializable {
                 }
             }
         });
-        Image viewFaultsImage = new Image("file:/C:/Users/luke.cassidy/Desktop/faults.png");
+        Image viewFaultsImage = new Image(getClass().getResourceAsStream("/images/sidebar/faults.png"));
         imageViewFaults.setImage(viewFaultsImage);
         imageViewFaults.setFitHeight(50);
         imageViewFaults.setFitWidth(50);
@@ -122,7 +116,7 @@ public class ReturnItemController implements Initializable {
                 }
             }
         });
-        Image homeImage = new Image("file:/C:/Users/luke.cassidy/Desktop/home.png");
+        Image homeImage = new Image(getClass().getResourceAsStream("/images/sidebar/home.png"));
         imageViewHome.setImage(homeImage);
         imageViewHome.setFitHeight(50);
         imageViewHome.setFitWidth(50);

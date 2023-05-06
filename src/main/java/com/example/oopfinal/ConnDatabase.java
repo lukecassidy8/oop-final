@@ -1,6 +1,5 @@
 package com.example.oopfinal;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +15,7 @@ public class ConnDatabase {
     private static final String database_password = "Amanda140222!";
     private static final String loginQuery = "SELECT * FROM users.user_details WHERE user_username = ? and user_password = ?";
     private static final String registerQuery = "INSERT INTO users.user_details (user_username, user_password, user_email) VALUES (?, ?, ?)";
+    private static final String checkDupeUsername = "SELECT * FROM users.user_details WHERE user_username = ?";
 
     /**
      * Validate login boolean.
@@ -58,6 +58,26 @@ public class ConnDatabase {
         } catch (SQLException e){
             printSQLException(e);
         }
+    }
+
+    /**
+     * Check dupe user boolean.
+     *
+     * @param username the username
+     * @return the boolean
+     */
+    public boolean checkDupeUser(String username){
+        try(Connection connection = DriverManager.getConnection(url, database_username, database_password);
+        PreparedStatement preparedStatement = connection.prepareStatement(checkDupeUsername)){
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                return false;
+            }
+        }catch (SQLException e){
+            printSQLException(e);
+        }
+        return true;
     }
 
     /**

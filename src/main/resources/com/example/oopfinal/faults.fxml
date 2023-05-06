@@ -30,27 +30,22 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1feaff" height="900.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
       <ImageView fx:id="imageViewHome" fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../home.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageViewLoan" fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../loan.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageViewReturn" fitHeight="50.0" fitWidth="50.0" layoutX="29.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../return.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageViewQuit" fitHeight="50.0" fitWidth="50.0" layoutX="23.0" layoutY="781.0" onMouseClicked="#quit" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../logout.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageViewLogo" fitHeight="175.0" fitWidth="175.0" layoutX="123.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../library%20system%20logo%20new.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" layoutX="102.0" layoutY="217.0" prefHeight="17.0" prefWidth="373.0" text="Select the item you want to view the faults for" textFill="WHITE">

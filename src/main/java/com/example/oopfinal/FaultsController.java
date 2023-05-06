@@ -34,8 +34,6 @@ public class FaultsController implements Initializable {
     @FXML
     private TableColumn<Fault, Integer> columnItemID;
     @FXML
-    private TableColumn<Fault, String> columnItemName;
-    @FXML
     private TableColumn<Fault, String> columnFaultDescription;
     @FXML
     private TableColumn<Fault, String> columnSeverity;
@@ -60,9 +58,7 @@ public class FaultsController implements Initializable {
     @FXML
     private Label labelSelectID;
     private Stage stage;
-    private Scene scene;
-    private Parent root;
-    private final ObservableList<Fault> faultList = FXCollections.observableArrayList();
+    private Scene scene;private final ObservableList<Fault> faultList = FXCollections.observableArrayList();
     private final ObservableList<Item> itemList = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,19 +68,19 @@ public class FaultsController implements Initializable {
         comboBoxSelectID.setVisible(false);
         btnSelectID.setVisible(false);
         labelSelectID.setVisible(false);
-        Image logoImage = new Image("file:/C:/Users/luke.cassidy/Desktop/library system logo new.png");
+        Image logoImage = new Image(getClass().getResourceAsStream("/images/sidebar/logo.png"));
         imageViewLogo.setImage(logoImage);
         imageViewLogo.setFitHeight(90);
         imageViewLogo.setFitWidth(90);
-        Image logoutImage = new Image("file:/C:/Users/luke.cassidy/Desktop/logout.png");
+        Image logoutImage = new Image(getClass().getResourceAsStream("/images/sidebar/logout.png"));
         imageViewQuit.setImage(logoutImage);
         imageViewQuit.setFitWidth(50);
         imageViewQuit.setFitHeight(50);
-        Image homeImage = new Image("file:/C:/Users/luke.cassidy/Desktop/home.png");
+        Image homeImage = new Image(getClass().getResourceAsStream("/images/sidebar/home.png"));
         imageViewHome.setImage(homeImage);
         imageViewHome.setFitWidth(50);
         imageViewHome.setFitHeight(50);
-        imageViewHome.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        imageViewHome.setOnMouseClicked(new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
@@ -98,11 +94,11 @@ public class FaultsController implements Initializable {
                 }
             }
         });
-        Image returnImage = new Image("file:/C:/Users/luke.cassidy/Desktop/return.png");
+        Image returnImage = new Image(getClass().getResourceAsStream("/images/sidebar/return.png"));
         imageViewReturn.setImage(returnImage);
         imageViewReturn.setFitHeight(50);
         imageViewReturn.setFitWidth(50);
-        imageViewReturn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        imageViewReturn.setOnMouseClicked(new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
@@ -116,7 +112,7 @@ public class FaultsController implements Initializable {
                 }
             }
         });
-        Image loadLoanPage = new Image("file:/C:/Users/luke.cassidy/Desktop/loan.png");
+        Image loadLoanPage = new Image(getClass().getResourceAsStream("/images/sidebar/loan.png"));
         imageViewLoan.setImage(loadLoanPage);
         imageViewLoan.setFitWidth(50);
         imageViewLoan.setFitHeight(50);

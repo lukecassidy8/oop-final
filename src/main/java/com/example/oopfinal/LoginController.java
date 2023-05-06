@@ -43,7 +43,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image logoImage = new Image("file:/C:/Users/luke.cassidy/Desktop/library system logo new.png");
+        Image logoImage = new Image(getClass().getResourceAsStream("/images/sidebar/logo.png"));
         imageViewLogo.setImage(logoImage);
         imageViewLogo.setFitHeight(250);
         imageViewLogo.setFitWidth(250);
@@ -142,9 +142,6 @@ public class LoginController implements Initializable {
      *
      * @param event the event
      */
-    public void showPassword(ActionEvent event){
-
-    }
 
 
 }

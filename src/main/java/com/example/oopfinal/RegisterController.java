@@ -3,23 +3,25 @@ package com.example.oopfinal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 /**
  * The type Register controller.
  */
-public class RegisterController {
+public class RegisterController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -34,7 +36,16 @@ public class RegisterController {
     @FXML
     private Button btnRegister;
     @FXML
-    private Label registerMessageLabel;
+    private ImageView imageViewLogo;
+    @FXML
+    private Button btnCancel;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image logoImage = new Image(getClass().getResourceAsStream("/images/sidebar/logo.png"));
+        imageViewLogo.setImage(logoImage);
+        imageViewLogo.setFitHeight(250);
+        imageViewLogo.setFitWidth(250);
+    }
 
     /**
      * Register.
@@ -47,22 +58,28 @@ public class RegisterController {
         Window owner = btnRegister.getScene().getWindow();
 
         if (usernameTextField.getText().isEmpty()){
-            registerMessageLabel.setText("Username is empty!");
+            infoBox("Username is empty!", null, "Error");
             return;
         }
         if (passwordTextField.getText().isEmpty()){
-            registerMessageLabel.setText("Password is empty!");
+            infoBox("Password is empty!", null, "Error");
+            return;
         }
         if (emailTextField.getText().isEmpty()){
-            registerMessageLabel.setText("Email is empty");
+            infoBox("Email is empty!", null, "Error");
+            return;
         }
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String email = emailTextField.getText();
         ConnDatabase connDatabase = new ConnDatabase();
-        ConnDatabase.registerUser(username, password, email);
-
-        registerMessageLabel.setText("Registration Successful!");
+        boolean flag = connDatabase.checkDupeUser(username);
+        if (!flag){
+            infoBox("This username already exists", null, "Error");
+        }else {
+            ConnDatabase.registerUser(username, password, email);
+            infoBox("Registration successful!", null, "Success");
+        }
     }
 
     /**
@@ -78,4 +95,17 @@ public class RegisterController {
         stage.setScene(scene);
         stage.show();
     }
+    public static void infoBox(String infoMessage, String headerText, String title) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
+    }
+    public void cancel(ActionEvent ignoredEvent) {
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
+    }
+
+
 }

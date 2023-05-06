@@ -1,5 +1,6 @@
 package com.example.oopfinal;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +31,8 @@ public class HomePageController implements Initializable {
     private Scene scene;
     private Parent root;
     private User user;
+    @FXML
+    private ImageView imageViewLogo;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,6 +43,10 @@ public class HomePageController implements Initializable {
         } else{
             labelGreeting.setText("Good afternoon");
         }
+        Image logoImage = new Image(getClass().getResourceAsStream("/images/sidebar/logo.png"));
+        imageViewLogo.setImage(logoImage);
+        imageViewLogo.setFitWidth(200);
+        imageViewLogo.setFitHeight(200);
     }
 
     /**
@@ -105,5 +114,10 @@ public class HomePageController implements Initializable {
         labelUser.setText("You are logged in as: "+ username);
     }
 
-
+    /**
+     * Quit.
+     */
+    public void quit(){
+        Platform.exit();
+    }
 }

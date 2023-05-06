@@ -22,6 +22,7 @@ import java.io.*;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ResourceBundle;
 
 /**
@@ -59,9 +60,10 @@ public class SearchDatabaseController implements Initializable {
     private ImageView imageViewFaults;
     @FXML
     private ImageView imageViewReturn;
+    @FXML
+    private ImageView imageViewItems;
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
 
     private final ObservableList<Item> itemList = FXCollections.observableArrayList();
@@ -73,19 +75,19 @@ public class SearchDatabaseController implements Initializable {
                 "Standard-issue laptop", "Development Laptop");
         comboBoxSelectID.setVisible(false);
         btnConfirmLoanOut.setVisible(false);
-        Image logoImage = new Image("file:/C:/Users/luke.cassidy/Desktop/library system logo new.png");
+        Image logoImage = new Image(getClass().getResourceAsStream("/images/sidebar/logo.png"));
         imageViewLogo.setImage(logoImage);
         imageViewLogo.setFitHeight(90);
         imageViewLogo.setFitWidth(90);
-        Image logoutImage = new Image("file:/C:/Users/luke.cassidy/Desktop/logout.png");
+        Image logoutImage = new Image(getClass().getResourceAsStream("/images/sidebar/logout.png"));
         imageViewQuit.setImage(logoutImage);
         imageViewQuit.setFitWidth(50);
         imageViewQuit.setFitHeight(50);
-        Image homeImage = new Image("file:/C:/Users/luke.cassidy/Desktop/home.png");
+        Image homeImage = new Image(getClass().getResourceAsStream("/images/sidebar/home.png"));
         imageViewHome.setImage(homeImage);
         imageViewHome.setFitWidth(50);
         imageViewHome.setFitHeight(50);
-        imageViewHome.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        imageViewHome.setOnMouseClicked(new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
@@ -99,11 +101,11 @@ public class SearchDatabaseController implements Initializable {
                 }
             }
         });
-        Image faultsImage = new Image("file:/C:/Users/luke.cassidy/Desktop/faults.png");
+        Image faultsImage = new Image(getClass().getResourceAsStream("/images/sidebar/faults.png"));
         imageViewFaults.setImage(faultsImage);
         imageViewFaults.setFitHeight(50);
         imageViewFaults.setFitWidth(50);
-        imageViewFaults.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        imageViewFaults.setOnMouseClicked(new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
@@ -117,11 +119,11 @@ public class SearchDatabaseController implements Initializable {
                 }
             }
         });
-        Image returnImage = new Image("file:/C:/Users/luke.cassidy/Desktop/return.png");
+        Image returnImage = new Image(getClass().getResourceAsStream("/images/sidebar/return.png"));
         imageViewReturn.setImage(returnImage);
         imageViewReturn.setFitHeight(50);
         imageViewReturn.setFitWidth(50);
-        imageViewReturn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        imageViewReturn.setOnMouseClicked(new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
@@ -232,6 +234,10 @@ public class SearchDatabaseController implements Initializable {
         String itemName = comboBoxItems.getValue();
         comboBoxSelectID.getItems().clear();
         getItemsFromComboBox(itemName);
+        Image imageItem = new Image(getClass().getResourceAsStream("/images/items/" + itemName + ".png"));
+        imageViewItems.setImage(imageItem);
+        imageViewItems.setFitHeight(200);
+        imageViewItems.setFitWidth(150);
         columnID.setCellValueFactory(new PropertyValueFactory<>("itemID"));
         columnItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         columnDesc.setCellValueFactory(new PropertyValueFactory<>("itemDesc"));
@@ -246,26 +252,21 @@ public class SearchDatabaseController implements Initializable {
 
     public void printToFile() {
         if (!itemList.isEmpty()) {
-            PrintWriter writer = null;
-            try {
-                writer = new PrintWriter(new File("C:/Users/luke.cassidy/Desktop/oop-final/itemDetails.txt"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            try(PrintWriter writer = new PrintWriter("itemdetails.csv")){
+                StringBuilder builder = new StringBuilder();
+                builder.append("ID,Item Name,Description,Loan Date,Return Date,Loaned Out?\n");
+                for (Item item : tableItems.getItems()){
+                    builder.append(item.getItemID()).append(",");
+                    builder.append("\"").append(item.getItemName()).append("\",");
+                    builder.append("\"").append(item.getItemDesc()).append("\",");
+                    builder.append(item.getLoanDate()).append(",");
+                    builder.append(item.getReturnDate()).append(",");
+                    builder.append(item.getLoanedOut()).append("\n");
+                }
+                writer.write(builder.toString());
+            }catch (FileNotFoundException e){
+                System.out.println(e.getMessage());
             }
-            for (TableColumn<Item, ?> column : tableItems.getColumns()) {
-                writer.print(column.getText() + "\t");
-            }
-            writer.println();
-            for (Item item : tableItems.getItems()) {
-                writer.print(item.getItemID() + "\t");
-                writer.print(item.getItemName() + "\t");
-                writer.print(item.getItemDesc() + "\t");
-                writer.print(item.getLoanDate() + "\t");
-                writer.print(item.getReturnDate() + "\t");
-                writer.print(item.getLoanedOut() + "\t");
-                writer.println();
-            }
-            writer.close();
             infoBox("Items printed to DB", null, "Success");
 
         }
@@ -283,11 +284,13 @@ public class SearchDatabaseController implements Initializable {
         Connection connection = getSearchDatabaseConnection();
         Integer selectedValue = comboBoxSelectID.getValue();
         LocalDateTime timeNow = LocalDateTime.now();
-        String loanOutQuery = "UPDATE items SET loanedOut = ?, loanDate = ? WHERE itemID = ?";
+        LocalDateTime returnDate = timeNow.plus(Period.ofWeeks(1));
+        String loanOutQuery = "UPDATE items SET loanedOut = ?, loanDate = ?, returnDate = ? WHERE itemID = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(loanOutQuery);
         preparedStatement.setBoolean(1, true);
         preparedStatement.setObject(2, timeNow);
-        preparedStatement.setInt(3, selectedValue);
+        preparedStatement.setObject(3, returnDate);
+        preparedStatement.setInt(4, selectedValue);
         try {
             preparedStatement.executeUpdate();
         } catch (Exception e) {

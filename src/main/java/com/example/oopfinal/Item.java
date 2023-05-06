@@ -32,6 +32,12 @@ public class Item {
         this.returnDate = returnDate;
         this.loanedOut = loanedOut;
     }
+
+    /**
+     * Sets days until return.
+     *
+     * @param daysUntilReturn the days until return
+     */
     public void setDaysUntilReturn(long daysUntilReturn) {
         this.daysUntilReturn = daysUntilReturn;
     }
@@ -90,6 +96,11 @@ public class Item {
         return loanedOut;
     }
 
+    /**
+     * Gets days until return.
+     *
+     * @return the days until return
+     */
     public long getDaysUntilReturn() {
         return daysUntilReturn;
     }

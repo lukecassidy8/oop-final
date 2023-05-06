@@ -31,7 +31,6 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1feaff" height="900.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
       <ImageView fx:id="imageViewLogo" fitHeight="175.0" fitWidth="175.0" layoutX="122.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../library%20system%20logo%20new.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" layoutX="128.0" layoutY="212.0" prefHeight="17.0" prefWidth="309.0" text="What item do you want to return?" textFill="WHITE">
@@ -51,22 +50,18 @@
       </Label>
       <ImageView fx:id="imageViewQuit" fitHeight="50.0" fitWidth="50.0" layoutX="23.0" layoutY="781.0" onMouseClicked="#quit" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../logout.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageViewHome" fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../home.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageViewLoan" fitHeight="50.0" fitWidth="50.0" layoutX="29.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../loan.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageViewFaults" fitHeight="50.0" fitWidth="50.0" layoutX="28.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../faults.png" />
          </image>
       </ImageView>
    </children>
