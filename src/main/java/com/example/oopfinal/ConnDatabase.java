@@ -1,5 +1,8 @@
 package com.example.oopfinal;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +19,7 @@ public class ConnDatabase {
     private static final String loginQuery = "SELECT * FROM users.user_details WHERE user_username = ? and user_password = ?";
     private static final String registerQuery = "INSERT INTO users.user_details (user_username, user_password, user_email) VALUES (?, ?, ?)";
     private static final String checkDupeUsername = "SELECT * FROM users.user_details WHERE user_username = ?";
+    private static final String checkDupeEmail = "SELECT * FROM users.user_details WHERE user_email = ?";
 
     /**
      * Validate login boolean.
@@ -79,6 +83,19 @@ public class ConnDatabase {
         }
         return true;
     }
+    public boolean checkDupeEmail(String email) {
+        try (Connection connection = getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(checkDupeEmail)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return true;
+    }
 
     /**
      * Print sql exception.
@@ -100,4 +117,8 @@ public class ConnDatabase {
             }
         }
     }
+    public Connection getDatabaseConnection() throws SQLException {
+        return DriverManager.getConnection(url, database_username, database_password);
+    }
+
 }

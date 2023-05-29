@@ -41,6 +41,7 @@ public class LoginController implements Initializable {
     private ImageView imageViewLogo;
     private String username;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image logoImage = new Image(getClass().getResourceAsStream("/images/sidebar/logo.png"));
@@ -62,11 +63,11 @@ public class LoginController implements Initializable {
         String password = passwordTextField.getText();
 
         if (username.isEmpty()){
-            loginMessageLabel.setText("Your username is empty");
+            infoBox("Your username is empty", null, "Error");
             return;
         }
         if (password.isEmpty()) {
-            loginMessageLabel.setText("Your password is empty");
+            infoBox("Your password is empty", null, "Error");
             return;
         }
 
@@ -136,12 +137,6 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-    /**
-     * Show password.
-     *
-     * @param event the event
-     */
 
 
 }

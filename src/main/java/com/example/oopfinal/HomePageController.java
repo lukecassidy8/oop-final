@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 /**
  * The type Home page controller.
  */
-public class HomePageController implements Initializable {
+public class HomePageController extends User implements Initializable {
 
     @FXML
     private Label labelUser;
@@ -33,6 +33,15 @@ public class HomePageController implements Initializable {
     private User user;
     @FXML
     private ImageView imageViewLogo;
+
+    /**
+     * Instantiates a new User.
+     *
+     * @param username the username
+     */
+    public HomePageController(String username) {
+        super(username);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,13 +78,6 @@ public class HomePageController implements Initializable {
      * @param event the event
      * @throws IOException the io exception
      */
-    public void loadPrintItems(ActionEvent event) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("printitems.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     /**
      * Load return item.

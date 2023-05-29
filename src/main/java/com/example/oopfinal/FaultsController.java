@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -40,6 +41,8 @@ public class FaultsController implements Initializable {
     @FXML
     private TableColumn<Fault, Date> columnCreatedAt;
     @FXML
+    private TableColumn<Fault, String> columnItemName;
+    @FXML
     private ComboBox<String> comboBoxItems;
     @FXML
     private ComboBox<Integer>comboBoxSelectID;
@@ -57,9 +60,20 @@ public class FaultsController implements Initializable {
     private ImageView imageViewReturn;
     @FXML
     private Label labelSelectID;
+    @FXML
+    private TextField textDescription;
+    @FXML
+    private Label labelFaultInfo;
+    @FXML
+    private ComboBox comboBoxSeverity;
+    @FXML
+    private Button btnConfirmAddFault;
+
     private Stage stage;
-    private Scene scene;private final ObservableList<Fault> faultList = FXCollections.observableArrayList();
+    private Scene scene;
+    private final ObservableList<Fault> faultList = FXCollections.observableArrayList();
     private final ObservableList<Item> itemList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboBoxItems.getItems().addAll("24 Inch Monitor", "27 Inch Monitor", "Mouse", "Keyboard", "Monitor Stand",
@@ -130,7 +144,10 @@ public class FaultsController implements Initializable {
                 }
             }
         });
-
+        textDescription.setVisible(false);
+        labelFaultInfo.setVisible(false);
+        comboBoxSeverity.setVisible(false);
+        btnConfirmAddFault.setVisible(false);
     }
 
     /**
@@ -211,6 +228,10 @@ public class FaultsController implements Initializable {
      */
     public void viewFaults(){
         Integer itemID = comboBoxSelectID.getValue();
+        if (comboBoxSelectID.getSelectionModel().isEmpty()){
+            infoBox("Please select an item ID", null, "Error");
+            return;
+        }
         getFaults(itemID);
         columnItemID.setCellValueFactory(new PropertyValueFactory<>("itemID"));
         columnFaultID.setCellValueFactory(new PropertyValueFactory<>("faultID"));
@@ -226,6 +247,10 @@ public class FaultsController implements Initializable {
      */
     public void getItemsFromComboBox(){
         String itemName = comboBoxItems.getValue();
+        if (comboBoxItems.getSelectionModel().isEmpty()){
+            infoBox("Please select an item", null, "Error");
+            return;
+        }
         comboBoxSelectID.getItems().clear();
         getItemIDFromComboBox(itemName);
         columnItemID.setCellValueFactory(new PropertyValueFactory<>("itemID"));
@@ -238,6 +263,69 @@ public class FaultsController implements Initializable {
         comboBoxSelectID.setVisible(true);
         btnSelectID.setVisible(true);
         labelSelectID.setVisible(true);
+    }
+
+    /**
+     * Add fault.
+     */
+    public void addFault(){
+        textDescription.setVisible(true);
+        labelFaultInfo.setVisible(true);
+        comboBoxSeverity.setVisible(true);
+        btnConfirmAddFault.setVisible(true);
+        comboBoxSeverity.getItems().addAll("Critical", "High", "Medium", "Low");
+    }
+
+    /**
+     * Add new fault.
+     */
+    public void addNewFault() {
+        int itemID = comboBoxSelectID.getValue();
+        int newFaultID = 0;
+        try (Connection connection = getSearchDatabaseConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS entry_count FROM faults;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int entry_count = resultSet.getInt("entry_count");
+                newFaultID = entry_count + 1;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        int faultID = newFaultID;
+        String description = textDescription.getText();
+        String severity = comboBoxSeverity.getValue().toString();
+        LocalDateTime createdAt = LocalDateTime.now();
+        LocalDateTime updatedAt = LocalDateTime.now();
+        Fault fault = new Fault(faultID, itemID, description, severity, createdAt, updatedAt);
+        tableFaults.getItems().add(fault);
+        if (description.isEmpty()){
+            infoBox("Please populate description", null, "Error");
+            return;
+        }
+        if (severity.isEmpty()){
+            infoBox("Please populate the severity", null, "Error");
+            return;
+        }
+
+        try (Connection connection = getSearchDatabaseConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO faults (faultID, itemID, description, severity, createdAt) VALUES (?, ?, ?, ?, ?)");
+            preparedStatement.setInt(1, faultID);
+            preparedStatement.setInt(2, itemID);
+            preparedStatement.setString(3, description);
+            preparedStatement.setString(4, severity);
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(createdAt));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void infoBox(String infoMessage, String headerText, String title) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(infoMessage);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
     }
 
     /**

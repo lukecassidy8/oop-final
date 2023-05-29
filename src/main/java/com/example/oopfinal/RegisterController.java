@@ -76,6 +76,14 @@ public class RegisterController implements Initializable {
         boolean flag = connDatabase.checkDupeUser(username);
         if (!flag){
             infoBox("This username already exists", null, "Error");
+            return;
+        }else {
+            ConnDatabase.registerUser(username, password, email);
+            infoBox("Registration successful!", null, "Success");
+        }
+        boolean flag1 = connDatabase.checkDupeEmail(email);
+        if (!flag1){
+            infoBox("The email already exists", null, "Error");
         }else {
             ConnDatabase.registerUser(username, password, email);
             infoBox("Registration successful!", null, "Success");
@@ -95,6 +103,14 @@ public class RegisterController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Info box.
+     *
+     * @param infoMessage the info message
+     * @param headerText  the header text
+     * @param title       the title
+     */
     public static void infoBox(String infoMessage, String headerText, String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(infoMessage);
@@ -102,6 +118,12 @@ public class RegisterController implements Initializable {
         alert.setHeaderText(headerText);
         alert.showAndWait();
     }
+
+    /**
+     * Cancel.
+     *
+     * @param ignoredEvent the ignored event
+     */
     public void cancel(ActionEvent ignoredEvent) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();

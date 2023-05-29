@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 /**
  * The type Search database controller.
  */
-public class SearchDatabaseController implements Initializable {
+public class LoanController implements Initializable {
 
     @FXML
     private TableView <Item> tableItems;
@@ -250,6 +250,9 @@ public class SearchDatabaseController implements Initializable {
         btnConfirmLoanOut.setVisible(true);
     }
 
+    /**
+     * Print to file.
+     */
     public void printToFile() {
         if (!itemList.isEmpty()) {
             try(PrintWriter writer = new PrintWriter("itemdetails.csv")){
@@ -285,6 +288,10 @@ public class SearchDatabaseController implements Initializable {
         Integer selectedValue = comboBoxSelectID.getValue();
         LocalDateTime timeNow = LocalDateTime.now();
         LocalDateTime returnDate = timeNow.plus(Period.ofWeeks(1));
+        if (comboBoxSelectID.getSelectionModel().isEmpty()){
+            infoBox("Please select a value from the box", null, "Error");
+            return;
+        }
         String loanOutQuery = "UPDATE items SET loanedOut = ?, loanDate = ?, returnDate = ? WHERE itemID = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(loanOutQuery);
         preparedStatement.setBoolean(1, true);
@@ -297,6 +304,7 @@ public class SearchDatabaseController implements Initializable {
             e.printStackTrace();
         }
         infoBox("This item is now loaned out", null, "Loan Out Success");
+
     }
 
     /**

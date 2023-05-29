@@ -13,6 +13,8 @@ public class Fault {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    private String itemName;
+
     /**
      * Instantiates a new Fault.
      *
@@ -139,4 +141,6 @@ public class Fault {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 }
+

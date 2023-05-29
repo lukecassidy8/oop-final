@@ -266,8 +266,8 @@ public class ReturnItemController implements Initializable {
                 LocalDateTime returnDateTime = resultSet.getTimestamp("returnDate").toLocalDateTime();
                 long currentDay = System.currentTimeMillis() / (24 * 60 * 60 * 1000);
                 long returnDay = returnDateTime.toLocalDate().toEpochDay();
-                long difference = returnDay - currentDay;
-                if (timeNow.isBefore(returnDateTime)){
+                long difference = currentDay - returnDay;
+                if (timeNow.isAfter(returnDateTime)){
                     long overdueCharge = difference * 5;
                     infoBox("This item is overdue, this item is " + difference + " days overdue and you owe £" +overdueCharge, null, "Overdue Item");
                 } else {
@@ -294,6 +294,7 @@ public class ReturnItemController implements Initializable {
         alert.setHeaderText(headerText);
         alert.showAndWait();
     }
+
     /**
      * Quit.
      */
