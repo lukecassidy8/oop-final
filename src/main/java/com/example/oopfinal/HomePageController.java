@@ -34,13 +34,7 @@ public class HomePageController extends User implements Initializable {
     @FXML
     private ImageView imageViewLogo;
 
-    /**
-     * Instantiates a new User.
-     *
-     * @param username the username
-     */
-    public HomePageController(String username) {
-        super(username);
+    public HomePageController() {
     }
 
     @Override
